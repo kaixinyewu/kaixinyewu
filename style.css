@@ -1,0 +1,54 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fdf6ec;
+    color: #5c4033;
+    margin: 0;
+    padding: 0;
+}
+header {
+    background-color: #d9c7a1;
+    padding: 20px;
+    text-align: center;
+}
+h1 {
+    margin: 0;
+}
+main {
+    padding: 20px;
+}
+section {
+    margin-bottom: 30px;
+}
+.buy-button {
+    display: inline-block;
+    background-color: #a1866f;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+.buy-button:hover {
+    background-color: #8a6b50;
+}
+form input, form textarea {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+}
+form button {
+    background-color: #a1866f;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+form button:hover {
+    background-color: #8a6b50;
+}
+footer {
+    background-color: #d9c7a1;
+    text-align: center;
+    padding: 10px;
+}
