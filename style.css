@@ -20,18 +20,7 @@ main {
 section {
     margin-bottom: 30px;
 }
-.buy-button {
-    display: inline-block;
-    background-color: #a1866f;
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-}
-.buy-button:hover {
-    background-color: #8a6b50;
-}
-form input, form textarea {
+form select, form input {
     display: block;
     width: 100%;
     margin: 10px 0;
@@ -44,8 +33,8 @@ form button {
     border: none;
     border-radius: 5px;
 }
-form button:hover {
-    background-color: #8a6b50;
+form button:disabled {
+    background-color: #ccc;
 }
 footer {
     background-color: #d9c7a1;

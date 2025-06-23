@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,38 +14,108 @@
     </header>
     <main>
         <section>
-            <h2>我们的服务</h2>
-            <p>欢迎购买Instagram粉丝服务，点击下方按钮联系客服。</p>
-            <a href="https://wa.me/60139760867" class="buy-button" target="_blank">WhatsApp Buy Now</a>
+            <h2>我们的服务 Our Services Include</h2>
+            <p>Instagram / Facebook / Douyin / Tiktok / 小红书 / Youtube / Telegram</p>
         </section>
 
         <section>
-            <h2>联系表单（样式展示）</h2>
-            <form onsubmit="alert('暂未开放，请联系WhatsApp'); return false;">
-                <input type="text" placeholder="您的名字" required>
-                <input type="email" placeholder="您的邮箱" required>
-                <textarea placeholder="留言内容"></textarea>
-                <button type="submit">提交</button>
+            <h2>购买表单</h2>
+            <form id="purchaseForm">
+                <label>请选择APP:</label>
+                <select id="appSelect" onchange="updateItemOptions()">
+                    <option value="">请选择</option>
+                    <option value="Instagram">Instagram</option>
+                    <option value="Facebook">Facebook</option>
+                    <option value="Douyin">Douyin</option>
+                    <option value="Tiktok">Tiktok</option>
+                    <option value="XHS">小红书</option>
+                    <option value="Youtube">Youtube</option>
+                    <option value="Telegram">Telegram</option>
+                </select>
+
+                <label>请选择物品:</label>
+                <select id="itemSelect" onchange="updateMinQuantity()">
+                    <option value="">请先选择APP</option>
+                </select>
+
+                <label>请输入数量:</label>
+                <input type="number" id="quantityInput" placeholder="请输入数量" oninput="validateQuantity()">
+                <p id="minInfo"></p>
+
+                <button type="submit" id="submitBtn" disabled>联系WhatsApp购买</button>
             </form>
-        </section>
-
-        <section>
-            <h2>会员登录（样式展示）</h2>
-            <form onsubmit="alert('暂未开放，请联系WhatsApp'); return false;">
-                <input type="text" placeholder="用户名" required>
-                <input type="password" placeholder="密码" required>
-                <button type="submit">登录</button>
-            </form>
-        </section>
-
-        <section>
-            <h2>留言区（样式展示）</h2>
-            <textarea placeholder="留言内容"></textarea>
-            <button onclick="alert('留言功能暂未开放')">提交留言</button>
         </section>
     </main>
     <footer>
         <p>&copy; 2025 Kaixinyewu. All rights reserved.</p>
     </footer>
+
+<script>
+const itemOptions = {
+    "Instagram": {
+        "全球粉": {min:100, price:"RM2.10"},
+        "华人粉": {min:20, price:"RM1.20"},
+        "全球赞": {min:100, price:"RM1.00"},
+        "华人赞": {min:20, price:"RM1.00"},
+        "Ig view": {min:100, price:"RM1.00"},
+        "全球IGstoryview": {min:100, price:"RM1.00"},
+        "华人storyview": {min:100, price:"RM1.00"},
+        "Followers refill 30day": {min:100, price:"RM2.10"},
+        "Follower refill 15day": {min:100, price:"RM1.70"},
+        "Follower no refill": {min:100, price:"RM1.68"}
+    }
+};
+
+function updateItemOptions(){
+    const app = document.getElementById('appSelect').value;
+    const itemSelect = document.getElementById('itemSelect');
+    itemSelect.innerHTML = "";
+
+    if(itemOptions[app]){
+        for(let item in itemOptions[app]){
+            const opt = document.createElement('option');
+            opt.value = item;
+            opt.innerText = item;
+            itemSelect.appendChild(opt);
+        }
+    }else{
+        const opt = document.createElement('option');
+        opt.innerText = "暂无选项";
+        itemSelect.appendChild(opt);
+    }
+}
+
+function updateMinQuantity(){
+    validateQuantity();
+}
+
+function validateQuantity(){
+    const app = document.getElementById('appSelect').value;
+    const item = document.getElementById('itemSelect').value;
+    const quantity = parseInt(document.getElementById('quantityInput').value);
+    const minInfo = document.getElementById('minInfo');
+    const submitBtn = document.getElementById('submitBtn');
+
+    if(itemOptions[app] && itemOptions[app][item]){
+        const min = itemOptions[app][item].min;
+        const price = itemOptions[app][item].price;
+        minInfo.innerText = `最低数量为 ${min}，价格 ${price}`;
+
+        if(quantity >= min){
+            submitBtn.disabled = false;
+        }else{
+            submitBtn.disabled = true;
+        }
+    }else{
+        minInfo.innerText = "请先选择APP和物品";
+        submitBtn.disabled = true;
+    }
+}
+
+document.getElementById('purchaseForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    alert('请联系WhatsApp：+60139760867 下单');
+});
+</script>
 </body>
 </html>
